@@ -1,13 +1,13 @@
 #include "class.h"
 
-BigInt::BigInt::BigInt()
+BigInteger::BigInt::BigInt()
 {
 	plus = true;
 	value = "0";
 	length = value.length();
 }
 
-BigInt::BigInt::BigInt(std::string Val)
+BigInteger::BigInt::BigInt(std::string Val)
 {
 	if (Val[0] == '-')
 	{
@@ -26,7 +26,7 @@ BigInt::BigInt::BigInt(std::string Val)
 	length = value.length();
 }
 
-BigInt::BigInt::BigInt(long long Val)
+BigInteger::BigInt::BigInt(long long Val)
 {
 	if (Val < 0)
 	{
@@ -42,7 +42,7 @@ BigInt::BigInt::BigInt(long long Val)
 	length = value.length();
 }
 
-BigInt::BigInt::BigInt(int Val)
+BigInteger::BigInt::BigInt(int Val)
 {
 	if (Val < 0)
 	{
@@ -58,21 +58,21 @@ BigInt::BigInt::BigInt(int Val)
 	length = value.length();
 }
 
-BigInt::BigInt::BigInt(BigInt& Ref)
+BigInteger::BigInt::BigInt(BigInt& Ref)
 {
 	plus = Ref.plus;
 	length = Ref.length;
 	value = Ref.value;
 }
 
-void BigInt::BigInt::operator=(BigInt& Ref)
+void BigInteger::BigInt::operator=(BigInt& Ref)
 {
 	this->length = Ref.length;
 	this->plus = Ref.plus;
 	this->value = Ref.value;
 }
 
-void BigInt::BigInt::operator=(std::string Val)
+void BigInteger::BigInt::operator=(std::string Val)
 {
 	if (Val[0] == '-')
 	{
@@ -91,7 +91,7 @@ void BigInt::BigInt::operator=(std::string Val)
 	length = value.length();
 }
 
-void BigInt::BigInt::operator=(long long Val)
+void BigInteger::BigInt::operator=(long long Val)
 {
 	if (Val < 0)
 	{
@@ -107,7 +107,7 @@ void BigInt::BigInt::operator=(long long Val)
 	length = value.length();
 }
 
-void BigInt::BigInt::operator=(int Val)
+void BigInteger::BigInt::operator=(int Val)
 {
 	if (Val < 0)
 	{
@@ -123,7 +123,7 @@ void BigInt::BigInt::operator=(int Val)
 	length = value.length();
 }
 
-int BigInt::BigInt::compare(BigInt& Target)
+int BigInteger::BigInt::compare(BigInt& Target)
 {
 	if (this->plus == Target.plus && this->value == Target.value)
 		return 0;
@@ -143,19 +143,19 @@ int BigInt::BigInt::compare(BigInt& Target)
 	return 0;
 }
 
-int BigInt::BigInt::compare(std::string Target)
+int BigInteger::BigInt::compare(std::string Target)
 {
 	BigInt temp(Target);
 	return compare(temp);
 }
 
-int BigInt::BigInt::compare(long long Target)
+int BigInteger::BigInt::compare(long long Target)
 {
 	BigInt temp(Target);
 	return compare(temp);
 }
 
-int BigInt::BigInt::compare(int Target)
+int BigInteger::BigInt::compare(int Target)
 {
 	BigInt temp(Target);
 	return compare(temp);

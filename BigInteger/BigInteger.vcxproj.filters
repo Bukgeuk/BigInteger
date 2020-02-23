@@ -21,7 +21,10 @@
     <ClInclude Include="include\operator.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="include\BigInt.h">
+    <ClInclude Include="include\arithmetic.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BigInteger.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
@@ -30,6 +33,9 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="src\operator.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="src\arithmetic.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

@@ -4,7 +4,7 @@
 #include <string>
 #include "class.h"
 
-namespace BigInt
+namespace BigInteger
 {
 	bool operator==(BigInt& A, BigInt& B);
 	bool operator==(BigInt& A, std::string B);

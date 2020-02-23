@@ -139,11 +139,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="include\BigInt.h" />
+    <ClInclude Include="include\arithmetic.h" />
+    <ClInclude Include="include\BigInteger.h" />
     <ClInclude Include="include\class.h" />
     <ClInclude Include="include\operator.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\arithmetic.cpp" />
     <ClCompile Include="src\class.cpp" />
     <ClCompile Include="src\operator.cpp" />
   </ItemGroup>

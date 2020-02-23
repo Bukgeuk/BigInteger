@@ -3,7 +3,7 @@
 #include <iostream>
 #include <string>
 
-namespace BigInt
+namespace BigInteger
 {
 	class BigInt
 	{

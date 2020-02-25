@@ -1,41 +1,44 @@
 #include "operator.h"
 
-bool BigInt::operator==(BigInt& A, BigInt& B)
+bool BigInteger::operator==(BigInt& A, BigInt& B)
 {
 	return (A.compare(B) == 0);
 }
 
-bool BigInt::operator==(BigInt& A, std::string B)
+bool BigInteger::operator==(BigInt& A, std::string B)
 {
 	BigInt temp(B);
-	return A == temp;
+	return (A.compare(temp) == 0);
 }
 
-bool BigInt::operator==(BigInt& A, long long B)
+bool BigInteger::operator==(BigInt& A, long long B)
 {
 	BigInt temp(B);
-	return A == temp;
+	return (A.compare(temp) == 0);
 }
 
-bool BigInt::operator==(BigInt& A, int B)
+bool BigInteger::operator==(BigInt& A, int B)
 {
 	BigInt temp(B);
-	return A == temp;
+	return (A.compare(temp) == 0);
 }
 
-bool BigInt::operator==(std::string A, BigInt& B)
+bool BigInteger::operator==(std::string A, BigInt& B)
 {
-	return B == A;
+	BigInt temp(A);
+	return (temp.compare(B) == 0);
 }
 
-bool BigInt::operator==(long long A, BigInt& B)
+bool BigInteger::operator==(long long A, BigInt& B)
 {
-	return B == A;
+	BigInt temp(A);
+	return (temp.compare(B) == 0);
 }
 
-bool BigInt::operator==(int A, BigInt& B)
+bool BigInteger::operator==(int A, BigInt& B)
 {
-	return B == A;
+	BigInt temp(A);
+	return (temp.compare(B) == 0);
 }
 
 
@@ -47,39 +50,45 @@ bool BigInt::operator==(int A, BigInt& B)
 
 
 
-bool BigInt::operator!=(BigInt& A, BigInt& B)
+bool BigInteger::operator!=(BigInt& A, BigInt& B)
 {
-	return !(A == B);
+	return (A.compare(B) != 0);
 }
 
-bool BigInt::operator!=(BigInt& A, std::string B)
+bool BigInteger::operator!=(BigInt& A, std::string B)
 {
-	return !(A == B);
+	BigInt temp(B);
+	return (A.compare(temp) != 0);
 }
 
-bool BigInt::operator!=(BigInt& A, long long B)
+bool BigInteger::operator!=(BigInt& A, long long B)
 {
-	return !(A == B);
+	BigInt temp(B);
+	return (A.compare(temp) != 0);
 }
 
-bool BigInt::operator!=(BigInt& A, int B)
+bool BigInteger::operator!=(BigInt& A, int B)
 {
-	return !(A == B);
+	BigInt temp(B);
+	return (A.compare(temp) != 0);
 }
 
-bool BigInt::operator!=(std::string A, BigInt& B)
+bool BigInteger::operator!=(std::string A, BigInt& B)
 {
-	return !(A == B);
+	BigInt temp(A);
+	return (temp.compare(B) != 0);
 }
 
-bool BigInt::operator!=(long long A, BigInt& B)
+bool BigInteger::operator!=(long long A, BigInt& B)
 {
-	return !(A == B);
+	BigInt temp(A);
+	return (temp.compare(B) != 0);
 }
 
-bool BigInt::operator!=(int A, BigInt& B)
+bool BigInteger::operator!=(int A, BigInt& B)
 {
-	return !(A == B);
+	BigInt temp(A);
+	return (temp.compare(B) != 0);
 }
 
 
@@ -91,45 +100,45 @@ bool BigInt::operator!=(int A, BigInt& B)
 
 
 
-bool BigInt::operator>(BigInt& A, BigInt& B)
+bool BigInteger::operator>(BigInt& A, BigInt& B)
 {
 	return (A.compare(B) == 1);
 }
 
-bool BigInt::operator>(BigInt& A, std::string B)
+bool BigInteger::operator>(BigInt& A, std::string B)
 {
 	BigInt temp(B);
-	return A > temp;
+	return (A.compare(temp) == 1);
 }
 
-bool BigInt::operator>(BigInt& A, long long B)
+bool BigInteger::operator>(BigInt& A, long long B)
 {
 	BigInt temp(B);
-	return A > temp;
+	return (A.compare(temp) == 1);
 }
 
-bool BigInt::operator>(BigInt& A, int B)
+bool BigInteger::operator>(BigInt& A, int B)
 {
 	BigInt temp(B);
-	return A > temp;
+	return (A.compare(temp) == 1);
 }
 
-bool BigInt::operator>(std::string A, BigInt& B)
+bool BigInteger::operator>(std::string A, BigInt& B)
 {
 	BigInt temp(A);
-	return temp > B;
+	return (temp.compare(B) == 1);
 }
 
-bool BigInt::operator>(long long A, BigInt& B)
+bool BigInteger::operator>(long long A, BigInt& B)
 {
 	BigInt temp(A);
-	return temp > B;
+	return (temp.compare(B) == 1);
 }
 
-bool BigInt::operator>(int A, BigInt& B)
+bool BigInteger::operator>(int A, BigInt& B)
 {
 	BigInt temp(A);
-	return temp > B;
+	return (temp.compare(B) == 1);
 }
 
 
@@ -141,44 +150,44 @@ bool BigInt::operator>(int A, BigInt& B)
 
 
 
-bool BigInt::operator<(BigInt& A, BigInt& B)
+bool BigInteger::operator<(BigInt& A, BigInt& B)
 {
 	return (A.compare(B) == -1);
 }
 
-bool BigInt::operator<(BigInt& A, std::string B)
+bool BigInteger::operator<(BigInt& A, std::string B)
 {
 	BigInt temp(B);
-	return A < temp;
+	return (A.compare(temp) == -1);
 }
-bool BigInt::operator<(BigInt& A, long long B)
+bool BigInteger::operator<(BigInt& A, long long B)
 {
 	BigInt temp(B);
-	return A < temp;
+	return (A.compare(temp) == -1);
 }
 
-bool BigInt::operator<(BigInt& A, int B)
+bool BigInteger::operator<(BigInt& A, int B)
 {
 	BigInt temp(B);
-	return A < temp;
+	return (A.compare(temp) == -1);
 }
 
-bool BigInt::operator<(std::string A, BigInt& B)
+bool BigInteger::operator<(std::string A, BigInt& B)
 {
 	BigInt temp(A);
-	return temp < B;
+	return (temp.compare(B) == -1);
 }
 
-bool BigInt::operator<(long long A, BigInt& B)
+bool BigInteger::operator<(long long A, BigInt& B)
 {
 	BigInt temp(A);
-	return temp < B;
+	return (temp.compare(B) == -1);
 }
 
-bool BigInt::operator<(int A, BigInt& B)
+bool BigInteger::operator<(int A, BigInt& B)
 {
 	BigInt temp(A);
-	return temp < B;
+	return (temp.compare(B) == -1);
 }
 
 
@@ -190,45 +199,45 @@ bool BigInt::operator<(int A, BigInt& B)
 
 
 
-bool BigInt::operator>=(BigInt& A, BigInt& B)
+bool BigInteger::operator>=(BigInt& A, BigInt& B)
 {
 	return (A.compare(B) != -1);
 }
 
-bool BigInt::operator>=(BigInt& A, std::string B)
+bool BigInteger::operator>=(BigInt& A, std::string B)
 {
 	BigInt temp(B);
-	return A >= temp;
+	return (A.compare(temp) != -1);
 }
 
-bool BigInt::operator>=(BigInt& A, long long B)
+bool BigInteger::operator>=(BigInt& A, long long B)
 {
 	BigInt temp(B);
-	return A >= temp;
+	return (A.compare(temp) != -1);
 }
 
-bool BigInt::operator>=(BigInt& A, int B)
+bool BigInteger::operator>=(BigInt& A, int B)
 {
 	BigInt temp(B);
-	return A >= temp;
+	return (A.compare(temp) != -1);
 }
 
-bool BigInt::operator>=(std::string A, BigInt& B)
+bool BigInteger::operator>=(std::string A, BigInt& B)
 {
 	BigInt temp(A);
-	return temp >= B;
+	return (temp.compare(B) != -1);
 }
 
-bool BigInt::operator>=(long long A, BigInt& B)
+bool BigInteger::operator>=(long long A, BigInt& B)
 {
 	BigInt temp(A);
-	return temp >= B;
+	return (temp.compare(B) != -1);
 }
 
-bool BigInt::operator>=(int A, BigInt& B)
+bool BigInteger::operator>=(int A, BigInt& B)
 {
 	BigInt temp(A);
-	return temp >= B;
+	return (temp.compare(B) != -1);
 }
 
 
@@ -240,42 +249,142 @@ bool BigInt::operator>=(int A, BigInt& B)
 
 
 
-bool BigInt::operator<=(BigInt& A, BigInt& B)
+bool BigInteger::operator<=(BigInt& A, BigInt& B)
 {
-	return (A.compare(B) == 1);
+	return (A.compare(B) != 1);
 }
 
-bool BigInt::operator<=(BigInt& A, std::string B)
+bool BigInteger::operator<=(BigInt& A, std::string B)
 {
 	BigInt temp(B);
-	return A <= temp;
+	return (A.compare(temp) != 1);
 }
-bool BigInt::operator<=(BigInt& A, long long B)
+bool BigInteger::operator<=(BigInt& A, long long B)
 {
 	BigInt temp(B);
-	return A <= temp;
+	return (A.compare(temp) != 1);
 }
 
-bool BigInt::operator<=(BigInt& A, int B)
+bool BigInteger::operator<=(BigInt& A, int B)
 {
 	BigInt temp(B);
-	return A <= temp;
+	return (A.compare(temp) != 1);
 }
 
-bool BigInt::operator<=(std::string A, BigInt& B)
+bool BigInteger::operator<=(std::string A, BigInt& B)
 {
 	BigInt temp(A);
-	return temp <= B;
+	return (temp.compare(B) != 1);
 }
 
-bool BigInt::operator<=(long long A, BigInt& B)
+bool BigInteger::operator<=(long long A, BigInt& B)
 {
 	BigInt temp(A);
-	return temp <= B;
+	return (temp.compare(B) != 1);
 }
 
-bool BigInt::operator<=(int A, BigInt& B)
+bool BigInteger::operator<=(int A, BigInt& B)
 {
 	BigInt temp(A);
-	return temp <= B;
+	return (temp.compare(B) != 1);
+}
+
+
+
+
+
+
+
+
+
+
+BigInteger::BigInt BigInteger::operator+(BigInt A, BigInt B)
+{
+	return (A.add(B));
+}
+
+BigInteger::BigInt BigInteger::operator+(BigInt& A, std::string B)
+{
+	BigInt temp(B);
+	return (A.add(temp));
+}
+
+BigInteger::BigInt BigInteger::operator+(BigInt& A, long long B)
+{
+	BigInt temp(B);
+	return (A.add(temp));
+}
+
+BigInteger::BigInt BigInteger::operator+(BigInt& A, int B)
+{
+	BigInt temp(B);
+	return (A.add(temp));
+}
+
+BigInteger::BigInt BigInteger::operator+(std::string A, BigInt& B)
+{
+	BigInt temp(A);
+	return (temp.add(B));
+}
+
+BigInteger::BigInt BigInteger::operator+(long long A, BigInt& B)
+{
+	BigInt temp(A);
+	return (temp.add(B));
+}
+
+BigInteger::BigInt BigInteger::operator+(int A, BigInt& B)
+{
+	BigInt temp(A);
+	return (temp.add(B));
+}
+
+
+
+
+
+
+
+
+
+
+BigInteger::BigInt BigInteger::operator-(BigInt A, BigInt B)
+{
+	return (A.sub(B));
+}
+
+BigInteger::BigInt BigInteger::operator-(BigInt& A, std::string B)
+{
+	BigInt temp(B);
+	return (A.sub(temp));
+}
+
+BigInteger::BigInt BigInteger::operator-(BigInt& A, long long B)
+{
+	BigInt temp(B);
+	return (A.sub(temp));
+}
+
+BigInteger::BigInt BigInteger::operator-(BigInt& A, int B)
+{
+	BigInt temp(B);
+	return (A.sub(temp));
+}
+
+BigInteger::BigInt BigInteger::operator-(std::string A, BigInt& B)
+{
+	BigInt temp(A);
+	return (temp.sub(B));
+}
+
+BigInteger::BigInt BigInteger::operator-(long long A, BigInt& B)
+{
+	BigInt temp(A);
+	return (temp.sub(B));
+}
+
+BigInteger::BigInt BigInteger::operator-(int A, BigInt& B)
+{
+	BigInt temp(A);
+	return (temp.sub(B));
 }

@@ -21,7 +21,7 @@
     <ClInclude Include="include\operator.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="include\BigInt.h">
+    <ClInclude Include="include\BigInteger.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

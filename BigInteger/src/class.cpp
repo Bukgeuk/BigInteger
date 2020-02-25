@@ -1,162 +1,413 @@
 #include "class.h"
 
-BigInt::BigInt::BigInt()
+BigInteger::BigInt::BigInt()
 {
-	plus = true;
-	value = "0";
-	length = value.length();
+	_plus = true;
+	_value = "0";
+	_length = _value.length();
 }
 
-BigInt::BigInt::BigInt(std::string Val)
+BigInteger::BigInt::BigInt(std::string Val)
 {
 	if (Val[0] == '-')
 	{
-		plus = false;
-		value = Val.substr(1);
+		_plus = false;
+		_value = Val.substr(1);
 	}
 	else
 	{
-		plus = true;
+		_plus = true;
 		if (Val[0] == '+')
-			value = Val.substr(1);
+			_value = Val.substr(1);
 		else
-			value = Val;
+			_value = Val;
 	}
 
-	length = value.length();
+	_length = _value.length();
 }
 
-BigInt::BigInt::BigInt(long long Val)
+BigInteger::BigInt::BigInt(long long Val)
 {
 	if (Val < 0)
 	{
-		plus = true;
-		value = std::to_string(Val * -1);
+		_plus = false;
+		_value = std::to_string(Val * -1);
 	}
 	else
 	{
-		plus = true;
-		value = std::to_string(Val);
+		_plus = true;
+		_value = std::to_string(Val);
 	}
 
-	length = value.length();
+	_length = _value.length();
 }
 
-BigInt::BigInt::BigInt(int Val)
+BigInteger::BigInt::BigInt(int Val)
 {
 	if (Val < 0)
 	{
-		plus = true;
-		value = std::to_string(Val * -1);
+		_plus = false;
+		_value = std::to_string(Val * -1);
 	}
 	else
 	{
-		plus = true;
-		value = std::to_string(Val);
+		_plus = true;
+		_value = std::to_string(Val);
 	}
 
-	length = value.length();
+	_length = _value.length();
 }
 
-BigInt::BigInt::BigInt(BigInt& Ref)
+BigInteger::BigInt::BigInt(const BigInt& Ref)
 {
-	plus = Ref.plus;
-	length = Ref.length;
-	value = Ref.value;
+	_plus = Ref._plus;
+	_length = Ref._length;
+	_value = Ref._value;
 }
 
-void BigInt::BigInt::operator=(BigInt& Ref)
+BigInteger::BigInt& BigInteger::BigInt::operator=(const BigInt& Ref)
 {
-	this->length = Ref.length;
-	this->plus = Ref.plus;
-	this->value = Ref.value;
+	this->_length = Ref._length;
+	this->_plus = Ref._plus;
+	this->_value = Ref._value;
+	return *this;
 }
 
-void BigInt::BigInt::operator=(std::string Val)
+BigInteger::BigInt& BigInteger::BigInt::operator=(std::string Val)
 {
 	if (Val[0] == '-')
 	{
-		plus = false;
-		value = Val.substr(1);
+		_plus = false;
+		_value = Val.substr(1);
 	}
 	else
 	{
-		plus = true;
+		_plus = true;
 		if (Val[0] == '+')
-			value = Val.substr(1);
+			_value = Val.substr(1);
 		else
-			value = Val;
+			_value = Val;
 	}
 
-	length = value.length();
+	_length = _value.length();
+
+	return *this;
 }
 
-void BigInt::BigInt::operator=(long long Val)
+BigInteger::BigInt& BigInteger::BigInt::operator=(long long Val)
 {
 	if (Val < 0)
 	{
-		plus = true;
-		value = std::to_string(Val * -1);
+		_plus = true;
+		_value = std::to_string(Val * -1);
 	}
 	else
 	{
-		plus = true;
-		value = std::to_string(Val);
+		_plus = true;
+		_value = std::to_string(Val);
 	}
 
-	length = value.length();
+	_length = _value.length();
+
+	return *this;
 }
 
-void BigInt::BigInt::operator=(int Val)
+BigInteger::BigInt& BigInteger::BigInt::operator=(int Val)
 {
 	if (Val < 0)
 	{
-		plus = true;
-		value = std::to_string(Val * -1);
+		_plus = true;
+		_value = std::to_string(Val * -1);
 	}
 	else
 	{
-		plus = true;
-		value = std::to_string(Val);
+		_plus = true;
+		_value = std::to_string(Val);
 	}
 
-	length = value.length();
+	_length = _value.length();
+
+	return *this;
 }
 
-int BigInt::BigInt::compare(BigInt& Target)
+int BigInteger::BigInt::compare(BigInt& Target)
 {
-	if (this->plus == Target.plus && this->value == Target.value)
+	if (this->_plus == Target._plus && this->_value == Target._value)
 		return 0;
-	else if ((this->plus && !Target.plus) || (this->length > Target.length))
+	else if ((this->_plus && !Target._plus) || (this->_length > Target._length))
 		return 1;
-	else if ((!this->plus && !Target.plus) || (this->length < Target.length))
+	else if ((!this->_plus && Target._plus) || (this->_length < Target._length))
 		return -1;
-
-	for (int i = 0; i < this->length; i++) // this->length == Target.length
+	else if (!this->_plus && !Target._plus)
 	{
-		if (this->value[i] > Target.value[i])
+		BigInt A(*this);
+		A._plus = true;
+		BigInt B(Target);
+		B._plus = true;
+		return B.compare(A);
+	}
+
+	for (int i = 0; i < this->_length; i++) // this->_length == Target._length
+	{
+		if (this->_value[i] > Target._value[i])
 			return 1;
-		else if (this->value[i] < Target.value[i])
+		else if (this->_value[i] < Target._value[i])
 			return -1;
 	}
 
 	return 0;
 }
 
-int BigInt::BigInt::compare(std::string Target)
+BigInteger::BigInt BigInteger::BigInt::add(BigInt& Target)
 {
-	BigInt temp(Target);
-	return compare(temp);
+	BigInt ret;
+
+	if (this->_plus && Target._plus) // (+) + (+)
+	{
+		if (this->compare(Target) == -1)
+		{
+			long long pos = this->_length;
+			long long min = Target._length - pos;
+			long long up = 0, temp;
+			std::string res;
+			bool no = false;
+
+			if (min == 0)
+				no = true;
+
+			while (pos > 0)
+			{
+				temp = Target._value[pos + min - 1] - '0' + this->_value[pos - 1] - '0' + up;
+				up = temp / 10;
+				res = (std::to_string((temp % 10)) + res);
+
+				pos--;
+			}
+
+			while (min > 0)
+			{
+				temp = Target._value[min - 1] - '0' + up;
+				up = temp / 10;
+				res = (std::to_string((temp % 10)) + res);
+
+				min--;
+			}
+
+			if (no)
+			{
+				res = (std::to_string(up) + res);
+			}
+
+			ret = res;
+		}
+		else
+		{
+			long long pos = Target._length;
+			long long min = this->_length - pos;
+			int up = 0, temp;
+			std::string res;
+			bool no = false;
+
+			if (min == 0)
+				no = true;
+
+			while (pos > 0)
+			{
+				temp = this->_value[pos + min - 1] - '0' + Target._value[pos - 1] - '0' + up;
+				up = temp / 10;
+				res = (std::to_string((temp % 10)) + res);
+
+				pos--;
+			}
+
+			while (min > 0)
+			{
+				temp = this->_value[min - 1] - '0' + up;
+				up = temp / 10;
+				res = (std::to_string((temp % 10)) + res);
+
+				min--;
+			}
+
+			if (no)
+			{
+				res = (std::to_string(up) + res);
+			}
+
+			ret = res;
+		}
+	}
+	else if (!this->_plus && !Target._plus) // (-) + (-)
+	{
+		BigInt A(*this);
+		A._plus = true;
+		BigInt B(Target);
+		B._plus = true;
+		ret = A.add(B);
+		ret._plus = false;
+	}
+	else if (this->_plus && !Target._plus)
+	{
+		if (this->_value == Target._value)
+			ret = 0;
+
+		BigInt A(*this);
+		BigInt B(Target);
+		B._plus = true;
+		ret = A.sub(B);
+	}
+	else if (!this->_plus && Target._plus)
+	{
+		if (this->_value == Target._value)
+			ret = 0;
+
+		BigInt A(*this);
+		A._plus = true;
+		BigInt B(Target);
+
+		int com = A.compare(B);
+
+		if (com == 1)
+		{
+			ret = A.sub(B);
+			ret._plus = false;
+		}
+		else if (com == -1)
+		{
+			ret = B.sub(A);
+		}
+	}
+
+	ret._length = ret._value.length();
+
+	return ret;
 }
 
-int BigInt::BigInt::compare(long long Target)
+long long BigInteger::BigInt::length()
 {
-	BigInt temp(Target);
-	return compare(temp);
+	return this->_length;
 }
 
-int BigInt::BigInt::compare(int Target)
+std::string BigInteger::BigInt::data()
 {
-	BigInt temp(Target);
-	return compare(temp);
+	if (!this->_plus)
+		return ("-" + this->_value);
+	else
+		return this->_value;
+}
+
+BigInteger::BigInt BigInteger::BigInt::sub(BigInt& Target)
+{
+	BigInt ret;
+
+	int com = this->compare(Target);
+
+	if (com == 0)
+	{
+		ret = 0;
+	}
+	else if (this->_plus && Target._plus) // (+) - (+)
+	{	
+		if (com == -1)
+		{
+			long long pos = this->_length;
+			long long min = Target._length - pos;
+			bool down = false;
+			std::string res;
+
+			while (pos > 0)
+			{
+				res = (std::to_string((Target._value[pos + min - 1] - '0') - (this->_value[pos - 1] - '0') - down) + res);
+
+				if (Target._value[pos + min - 1] - down < this->_value[pos - 1])				
+					down = true;
+				else
+					down = false;
+
+				pos--;
+			}
+
+			while (min > 0)
+			{
+				res = (std::to_string((Target._value[min - 1] - '0') - down) + res);
+
+				down = false;
+
+				min--;
+			}
+
+			ret = res;
+			ret._plus = false;
+
+		}
+		else
+		{
+			long long pos = Target._length;
+			long long min = this->_length - pos;
+			bool down = false;
+			std::string res;
+
+			while (pos > 0)
+			{
+				if (this->_value[pos + min - 1] - down < Target._value[pos - 1])
+				{
+					res = (std::to_string((this->_value[pos + min - 1] - '0' + 10) - (Target._value[pos - 1] - '0') - down) + res);
+					down = true;
+				}			
+				else
+				{
+					res = (std::to_string((this->_value[pos + min - 1] - '0') - (Target._value[pos - 1] - '0') - down) + res);
+					down = false;
+				}
+					
+				pos--;
+			}
+
+			while (min > 0)
+			{
+				res = (std::to_string((this->_value[min - 1] - '0') - down) + res);
+
+				down = false;
+
+				min--;
+			}
+
+			ret = res;
+		}
+	}
+	else if (!this->_plus && !Target._plus) // (-) - (-)
+	{
+		BigInt A(*this);
+		BigInt B(Target);
+		B._plus = true;
+		ret = A.add(B);
+	}
+	else if (this->_plus && !Target._plus)
+	{
+		BigInt A(*this);
+		BigInt B(Target);
+		B._plus = true;
+		ret = A.add(B);
+	}
+	else if (!this->_plus && Target._plus)
+	{
+		BigInt A(*this);
+		A._plus = true;
+		BigInt B(Target);
+		ret = A.add(B);
+		ret._plus = false;
+	}
+
+
+	return ret;
+}
+
+void BigInteger::BigInt::reverse()
+{
+	this->_plus = !this->_plus;
+}
+
+void BigInteger::BigInt::set_sign(bool plus)
+{
+	this->_plus = plus;
 }

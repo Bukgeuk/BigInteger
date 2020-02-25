@@ -53,4 +53,20 @@ namespace BigInteger
 	bool operator<=(std::string A, BigInt& B);
 	bool operator<=(long long A, BigInt& B);
 	bool operator<=(int A, BigInt& B);
+
+	BigInt operator+(BigInt A, BigInt B);
+	BigInt operator+(BigInt& A, std::string B);
+	BigInt operator+(BigInt& A, long long B);
+	BigInt operator+(BigInt& A, int B);
+	BigInt operator+(std::string A, BigInt& B);
+	BigInt operator+(long long A, BigInt& B);
+	BigInt operator+(int A, BigInt& B);
+
+	BigInt operator-(BigInt A, BigInt B);
+	BigInt operator-(BigInt& A, std::string B);
+	BigInt operator-(BigInt& A, long long B);
+	BigInt operator-(BigInt& A, int B);
+	BigInt operator-(std::string A, BigInt& B);
+	BigInt operator-(long long A, BigInt& B);
+	BigInt operator-(int A, BigInt& B);
 }

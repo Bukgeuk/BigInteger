@@ -12,18 +12,21 @@ namespace BigInteger
 		BigInt(std::string Val);
 		BigInt(long long Val);
 		BigInt(int Val);
-		BigInt(BigInt& Ref);
-		void operator=(BigInt& Ref);
-		void operator=(std::string Val);
-		void operator=(long long Val);
-		void operator=(int Val);
+		BigInt(const BigInt& Ref);
+		BigInt& operator=(const BigInt& Ref);
+		BigInt& operator=(std::string Val);
+		BigInt& operator=(long long Val);
+		BigInt& operator=(int Val);
 		int compare(BigInt& Target);
-		int compare(std::string Target);
-		int compare(long long Target);
-		int compare(int Target);
+		BigInt add(BigInt& Target);
+		BigInt sub(BigInt& Target);
+		long long length();
+		std::string data();
+		void reverse();
+		void set_sign(bool plus);
 	private:
-		bool plus;
-		long long length;
-		std::string value;
+		bool _plus;
+		long long _length;
+		std::string _value;
 	};
 }
